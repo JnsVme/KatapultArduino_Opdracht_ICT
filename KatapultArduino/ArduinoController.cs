@@ -1,11 +1,10 @@
 ﻿using System;
 using System.IO.Ports;
 using System.Windows;
-// Zorg ervoor dat je deze namespace toevoegt
 
 namespace Arduino
 {
-    public class ArduinoController
+    public class ArduinoController  //klasse om arduino te lezen op COMPOORT
     {
         private SerialPort arduinoPort;
 
@@ -13,7 +12,7 @@ namespace Arduino
         {
             try
             {
-                arduinoPort = new SerialPort(portName, baudRate);
+                arduinoPort = new SerialPort(portName, baudRate);    // try and catch vond ik het best om toe te passen, ook al was dit niet nodig volgens de opdrachtbeschrijving.
                 arduinoPort.Open();
             }
             catch (Exception ex)
@@ -23,9 +22,9 @@ namespace Arduino
             }
         }
 
-        public bool IsOpen => arduinoPort?.IsOpen == true;
+        public bool IsOpen => arduinoPort?.IsOpen == true;     // ? betekent dat de waarde van arduinoPort gecheckt wordt, en als deze niet null is, wordt de waarde van IsOpen gecheckt.
 
-        public void SendCommand(string command)
+        public void SendCommand(string command) // methode om commando's te sturen naar de arduino
         {
             if (IsOpen)
             {

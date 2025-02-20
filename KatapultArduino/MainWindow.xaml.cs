@@ -8,33 +8,33 @@ namespace KatapultArduino
 {
     public partial class MainWindow : Window
     {
-        private ArduinoController arduinoController;
+        private ArduinoController arduinoController; // maak een instantie van de klasse ArduinoController
         private bool isReady = false;
-        private DispatcherTimer countdownTimer;
+        private DispatcherTimer countdownTimer; 
         private int countdownValue;
 
         public MainWindow()
         {
             InitializeComponent();
-            arduinoController = new ArduinoController("COM4", 9600);
+            arduinoController = new ArduinoController("COM4", 9600); // maak een instantie van de klasse ArduinoController met de poortnaam en baudrate
             ResetArduino();
             Servoslider.IsEnabled = false;
 
             countdownTimer = new DispatcherTimer
             {
-                Interval = TimeSpan.FromSeconds(1)
+                Interval = TimeSpan.FromSeconds(1) // interval van 1 seconde
             };
             countdownTimer.Tick += CountdownTimer_Tick;
         }
 
-        private void Servo1Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private void Servo1Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) 
         {
             if (arduinoController.IsOpen && isReady)
             {
                 int angle = (int)((Slider)sender).Value;
                 arduinoController.SendCommand($"M{angle}");
-                int tandwiel = (12 * (angle - 90)) / 56;
-                lblslider.Content = $"{tandwiel}°";
+                int tandwiel = (12 * (angle - 90)) / 56; // bereken de hoek van het tandwiel
+                lblslider.Content = $"{tandwiel}°"; // zet de hoek van het tandwiel in de label
             }
             else
             {
@@ -44,7 +44,7 @@ namespace KatapultArduino
 
         private void Vuurknop_Click(object sender, RoutedEventArgs e)
         {
-            if (arduinoController.IsOpen && isReady)
+            if (arduinoController.IsOpen && isReady) // als de arduino open is en gereed is
             {
                 StartCountdown();
                 Servoslider.IsEnabled = false;
@@ -58,7 +58,7 @@ namespace KatapultArduino
         private void StartCountdown()
         {
             countdownValue = 3;
-            lbl.Content = countdownValue.ToString();
+            lbl.Content = countdownValue.ToString(); // zet de countdownValue in de label
             countdownTimer.Start();
         }
 
@@ -69,9 +69,9 @@ namespace KatapultArduino
 
             if (countdownValue == 0)
             {
-                countdownTimer.Stop();
+                countdownTimer.Stop();  // stop de timer
                 lbl.Content = "FIRE";
-                arduinoController.SendCommand("B");
+                arduinoController.SendCommand("B"); // stuur commando naar arduino
 
                 isReady = false;
                 ResetArduino();
@@ -93,7 +93,7 @@ namespace KatapultArduino
                 {
                     isReady = true;
                     resetTimer.Stop();
-                    Servoslider.IsEnabled = true;
+                    Servoslider.IsEnabled = true; // zet de slider weer aan
                     lbl.Content = "Ready?";
                 };
                 resetTimer.Start();
