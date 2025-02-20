@@ -19,4 +19,4 @@ Installatie en Gebruik
     Upload de code naar de microcontroller.
     Bedien de motoren via de controller en monitor de bewegingen via de WPF-interface.
 
-    💡 Deze layout is opgesteld door ChatGPT om de leesbaarheid en structuur van de README te verbeteren.
+💡 Deze layout is opgesteld door ChatGPT om de leesbaarheid en structuur van de README te verbeteren.
