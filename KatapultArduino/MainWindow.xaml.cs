@@ -8,7 +8,7 @@ namespace KatapultArduino
 {
     public partial class MainWindow : Window
     {
-        private ArduinoController arduinoController; // maak een instantie van de klasse ArduinoController
+        private ArduinoController arduinoController; // een instantie van de klasse ArduinoController
         private bool isReady = false;
         private DispatcherTimer countdownTimer; 
         private int countdownValue;
@@ -16,7 +16,7 @@ namespace KatapultArduino
         public MainWindow()
         {
             InitializeComponent();
-            arduinoController = new ArduinoController("COM4", 9600); // maak een instantie van de klasse ArduinoController met de poortnaam en baudrate
+            arduinoController = new ArduinoController("COM4", 9600); // een instantie van de klasse ArduinoController met de poortnaam en baudrate
             ResetArduino();
             Servoslider.IsEnabled = false;
 
